@@ -1,7 +1,38 @@
-﻿import axios from 'axios';
+import axios from 'axios';
 
-const rawBaseUrl = import.meta.env.VITE_API_URL || '/api';
-const normalizedBaseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl.slice(0, -1) : rawBaseUrl;
+const rawBaseUrl =
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  '/api';
+
+const normalizeApiBaseUrl = (baseUrl) => {
+  const trimmed = (baseUrl || '/api').trim();
+  if (!trimmed) return '/api';
+
+  // Relative URL mode (same-origin proxy)
+  if (trimmed.startsWith('/')) {
+    if (trimmed === '/') return '/api';
+    return trimmed.replace(/\/+$/, '');
+  }
+
+  // Absolute URL mode (deployed API host)
+  try {
+    const parsed = new URL(trimmed);
+    const path = parsed.pathname.replace(/\/+$/, '');
+    if (!path || path === '/') {
+      parsed.pathname = '/api';
+    } else if (!path.endsWith('/api')) {
+      parsed.pathname = `${path}/api`;
+    } else {
+      parsed.pathname = path;
+    }
+    return parsed.toString().replace(/\/+$/, '');
+  } catch {
+    return trimmed.replace(/\/+$/, '');
+  }
+};
+
+const normalizedBaseUrl = normalizeApiBaseUrl(rawBaseUrl);
 
 const api = axios.create({
   baseURL: normalizedBaseUrl,
