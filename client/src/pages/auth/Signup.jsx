@@ -164,7 +164,7 @@ const Signup = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden" style={{ background: '#03060D' }}>
-            <BackgroundTheme variant="auth" />
+            <BackgroundTheme variant="workspace" />
 
             <div className="relative z-10 w-full max-w-md">
                 {/* Header */}
@@ -374,3 +374,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

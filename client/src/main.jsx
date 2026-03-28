@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import App from './App';
 import { AppModeProvider } from './context/AppModeContext';
 import { AuthProvider } from './context/AuthContext';
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AppModeProvider>
         <AuthProvider>
           <LocalModeProvider>
-            <App />
+            <MotionConfig reducedMotion="always">
+              <App />
+            </MotionConfig>
           </LocalModeProvider>
         </AuthProvider>
       </AppModeProvider>

@@ -2,16 +2,35 @@ import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Loader2, Send, Sparkles } from 'lucide-react';
 import Sidebar from '../../components/common/Sidebar';
-import { getAppById } from '../../data/appRegistry';
 import { useAppMode } from '../../context/AppModeContext';
 import { useLocalMode } from '../../context/LocalModeContext';
 import { useAuth } from '../../context/AuthContext';
 import { logUsageEvent } from '../../services/usageService';
 import BackgroundTheme from '../../components/common/BackgroundTheme';
 
-const app = getAppById('lexachat');
-const PROXY_URL = app?.proxyPath || '/proxy/lexachat';
-const ACCOUNT_CHAT_URL = '/apps/lexachat/chat?embedded=1';
+const getBackendBaseUrl = () => {
+  const explicit = import.meta.env.VITE_SOCKET_URL?.trim();
+  if (explicit) return explicit.replace(/\/+$/, '');
+
+  const apiBase =
+    import.meta.env.VITE_API_BASE_URL ||
+    import.meta.env.VITE_API_URL ||
+    '/api';
+
+  if (apiBase.startsWith('/')) return '';
+
+  try {
+    const parsed = new URL(apiBase);
+    parsed.pathname = parsed.pathname.replace(/\/api\/?$/, '') || '/';
+    return parsed.toString().replace(/\/+$/, '');
+  } catch {
+    return '';
+  }
+};
+
+const BACKEND_BASE = getBackendBaseUrl();
+const PROXY_URL = `${BACKEND_BASE}/apps/lexachat`;
+const ACCOUNT_CHAT_URL = `${BACKEND_BASE}/apps/lexachat/chat?embedded=1`;
 const LOCAL_INITIAL = [
   {
     id: 'welcome',

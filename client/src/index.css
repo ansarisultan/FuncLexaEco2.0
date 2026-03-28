@@ -845,6 +845,8 @@
   overflow: hidden;
   isolation: isolate;
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .nebula-core__base,

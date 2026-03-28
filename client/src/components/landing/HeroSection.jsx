@@ -145,6 +145,14 @@ const HeroSection = () => {
             <span className="text-neon-purple font-semibold">cloud sync</span>. A premium AI workspace designed to feel
             futuristic, clean, and unified.
           </p>
+          <div className="mt-[-10px] mb-8">
+            <button
+              onClick={() => navigate('/portfolio')}
+              className="text-sm text-slate-400 hover:text-cyan-300 transition-colors"
+            >
+              Built by the developer. View portfolio
+            </button>
+          </div>
         </div>
 
         <div

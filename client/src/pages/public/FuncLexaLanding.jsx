@@ -18,7 +18,7 @@ const FuncLexaLanding = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden relative" style={{ color: '#e2e8f0' }}>
-      <BackgroundTheme variant="landing" />
+      <BackgroundTheme variant="workspace" />
       <Navbar />
 
       <main className="nebula-core-content">
@@ -38,3 +38,4 @@ const FuncLexaLanding = () => {
 };
 
 export default FuncLexaLanding;
+

@@ -32,9 +32,14 @@ const createAppProxy = (appConfig) => {
           delete proxyRes.headers[header];
         });
 
-        // Allow cross-origin embedding from any origin in dev / prod
+        // Reflect request origin for credentialed requests.
         proxyRes.headers['x-content-type-options'] = 'nosniff';
-        proxyRes.headers['access-control-allow-origin'] = '*';
+        const requestOrigin = req.headers.origin;
+        if (requestOrigin) {
+          proxyRes.headers['access-control-allow-origin'] = requestOrigin;
+          proxyRes.headers['access-control-allow-credentials'] = 'true';
+          proxyRes.headers['vary'] = 'Origin';
+        }
 
         const contentType = String(proxyRes.headers['content-type'] || '').toLowerCase();
         if (!contentType.includes('text/html')) {

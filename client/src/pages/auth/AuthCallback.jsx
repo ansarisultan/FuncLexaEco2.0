@@ -20,7 +20,7 @@ const AuthCallback = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden"
       style={{ background: '#03060D' }}>
-      <BackgroundTheme variant="auth" />
+      <BackgroundTheme variant="workspace" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -57,3 +57,4 @@ const AuthCallback = () => {
 };
 
 export default AuthCallback;
+

@@ -62,7 +62,7 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#03060D' }}>
-            <BackgroundTheme variant="auth" />
+            <BackgroundTheme variant="workspace" />
 
             {/* Left branding panel — desktop only */}
             <div className="hidden lg:flex flex-col justify-between w-[480px] shrink-0 p-12 relative z-10"
@@ -254,3 +254,4 @@ const Login = () => {
 };
 
 export default Login;
+

@@ -3,6 +3,7 @@ import { Server } from 'socket.io';
 import app from './app.js';
 import { connectDB } from './config/db.js';
 import { env } from './config/env.js';
+import { corsOptions } from './config/cors.js';
 import { logInfo, logError } from './utils/logger.js';
 import { verifyToken } from './utils/jwt.js';
 
@@ -11,7 +12,7 @@ const server = http.createServer(app);
 // Initialize Socket.IO with CORS settings matching Express
 export const io = new Server(server, {
   cors: {
-    origin: '*', // Set to your actual origins in production
+    origin: corsOptions.origin,
     methods: ['GET', 'POST'],
     credentials: true,
   },

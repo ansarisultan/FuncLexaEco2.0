@@ -1,7 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAppMode } from '../context/AppModeContext';
 import { useAuth } from '../context/AuthContext';
-import Loader from '../components/common/Loader';
 import { SocketProvider } from '../context/SocketContext';
 
 const ProtectedRoute = () => {
@@ -10,7 +9,7 @@ const ProtectedRoute = () => {
   const location = useLocation();
 
   if (initializing || !initialized) {
-    return <Loader label="Loading workspace" />;
+    return null;
   }
 
   if (!mode) {

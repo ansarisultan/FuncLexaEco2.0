@@ -2,7 +2,6 @@ import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import ModeGuard from './ModeGuard';
-import Loader from '../components/common/Loader';
 
 const Landing = lazy(() => import('../pages/public/FuncLexaLanding'));
 const Portfolio = lazy(() => import('../pages/public/Portfolio'));
@@ -26,7 +25,7 @@ const AppLoader = lazy(() => import('../components/apps/AppLoader'));
 
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<Loader label="Loading page" />}>
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/portfolio" element={<Portfolio />} />
